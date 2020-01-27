@@ -39,3 +39,4 @@ vignettes/*.pdf
 .Renviron
 
 gar-creds-un*
+main.log

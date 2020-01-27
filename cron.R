@@ -3,8 +3,15 @@ f <- file.path("main.R")
 cmd <- cron_rscript(f)
 cmd
 
-cron_add(command = cmd, frequency = 'daily', 
-         at= "6AM", id = "oddR")
+# cron_add(command = cmd,
+#          frequency = 'minutely',
+#          id = "oddR")
+cron_add(command = cmd,
+         frequency = 'daily',
+         at= "6AM",
+         id = "oddR")
+
+
 # cron_add(command = cmd, frequency = 'daily', at='7AM', id = 'test2')
 # cron_njobs()
 

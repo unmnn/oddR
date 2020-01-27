@@ -1,7 +1,6 @@
-source('crawl.R', echo=TRUE)
+source("~/oddR/crawl.R", echo=TRUE)
 library(tidyverse)
 library(rvest)
-library(stringr)
 Sys.setenv("GCS_AUTH_FILE" = "gar-creds-un-6c3ad4645d9c.json")
 Sys.setenv("GCS_DEFAULT_BUCKET" = "betting-data")
 library(googleCloudStorageR)
@@ -17,10 +16,11 @@ events <- c(
 
 crawl_res <- map_dfr(events, crawl)
 
-csv_out <- paste0(Sys.Date(), "-betting-data.csv")
-write_rds(crawl_res, csv_out)
+csv_out <- paste0("~/oddR/", format(Sys.time(), "%y%m%d-%H%M"), 
+                  "-betting-data.csv")
+write_csv(crawl_res, csv_out)
 
-gcs_upload(crawl_res, name = csv_out)
+gcs_upload(crawl_res, name = basename(csv_out))
 unlink(csv_out)
 
 # gcs_list_objects()
